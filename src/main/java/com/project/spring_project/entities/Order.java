@@ -47,7 +47,6 @@ public class Order implements Serializable {
     public Order() {
     }
 
-
     public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
         this.id = id;
         this.moment = moment;
@@ -99,7 +98,14 @@ public class Order implements Serializable {
     public void setPayment(Payment payment) {
         this.payment = payment;
     }
-
+    
+    public Double getTotal() {
+        double sum = 0;
+        for (OrderItem item: items) {
+            sum += item.getSubTotal();
+        }
+        return sum;
+    }
 
     @Override
     public boolean equals(Object o) {
